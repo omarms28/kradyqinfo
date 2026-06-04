@@ -372,22 +372,54 @@ h1 {
   animation: sheen 6s ease-in-out infinite;
 }
 
-.monogram,
+.profile-photo,
 .card-heading,
 .info-list {
   position: relative;
   z-index: 1;
 }
 
-.monogram {
-  display: grid;
-  width: 112px;
-  height: 112px;
-  place-items: center;
+.profile-photo {
+  width: min(100%, 228px);
+  aspect-ratio: 4 / 5;
   margin-bottom: 36px;
-  border: 1px solid rgba(216, 173, 91, 0.34);
-  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(216, 173, 91, 0.42);
+  border-radius: var(--radius);
   background: rgba(16, 16, 16, 0.44);
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.34);
+}
+
+.profile-photo::before {
+  position: absolute;
+  inset: 9px;
+  z-index: 2;
+  content: "";
+  border: 1px solid rgba(247, 241, 232, 0.2);
+  border-radius: calc(var(--radius) - 2px);
+  pointer-events: none;
+}
+
+.profile-photo::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background:
+    linear-gradient(180deg, transparent 52%, rgba(16, 16, 16, 0.18)),
+    linear-gradient(120deg, rgba(216, 173, 91, 0.08), transparent 34%);
+  pointer-events: none;
+}
+
+.profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 67% 35%;
+  filter: saturate(0.95) contrast(1.04);
+  transform: scale(1.34);
+  transform-origin: 67% 35%;
 }
 
 .card-heading {
@@ -599,6 +631,10 @@ h1 {
 
   .identity-card {
     padding: 22px;
+  }
+
+  .profile-photo {
+    width: min(100%, 190px);
   }
 
   .info-list div {
